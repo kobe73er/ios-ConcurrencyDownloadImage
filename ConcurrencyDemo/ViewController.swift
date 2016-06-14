@@ -70,48 +70,48 @@ class ViewController: UIViewController {
      DISPATCH_QUEUE_PRIORITY_BACKGROUND
      */
     
-//    @IBAction func didClickOnStart(sender: AnyObject) {
-//        
-//        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-//        
-//        
-//        dispatch_async(queue){()-> Void in
-//            
-//            let img1 = Downloader.downloadImageWithURL(imageURLs[0])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {self.imageView1.image=img1})
-//        }
-//        
-//        dispatch_async(queue) { () -> Void in
-//            
-//            let img2 = Downloader.downloadImageWithURL(imageURLs[1])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView2.image = img2
-//            })
-//            
-//        }
-//        dispatch_async(queue) { () -> Void in
-//            
-//            let img3 = Downloader.downloadImageWithURL(imageURLs[2])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView3.image = img3
-//            })
-//            
-//        }
-//        dispatch_async(queue) { () -> Void in
-//            
-//            let img4 = Downloader.downloadImageWithURL(imageURLs[3])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView4.image = img4
-//            })
-//        }
-//    }
+    //    @IBAction func didClickOnStart(sender: AnyObject) {
+    //
+    //        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    //
+    //
+    //        dispatch_async(queue){()-> Void in
+    //
+    //            let img1 = Downloader.downloadImageWithURL(imageURLs[0])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {self.imageView1.image=img1})
+    //        }
+    //
+    //        dispatch_async(queue) { () -> Void in
+    //
+    //            let img2 = Downloader.downloadImageWithURL(imageURLs[1])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView2.image = img2
+    //            })
+    //
+    //        }
+    //        dispatch_async(queue) { () -> Void in
+    //
+    //            let img3 = Downloader.downloadImageWithURL(imageURLs[2])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView3.image = img3
+    //            })
+    //
+    //        }
+    //        dispatch_async(queue) { () -> Void in
+    //
+    //            let img4 = Downloader.downloadImageWithURL(imageURLs[3])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView4.image = img4
+    //            })
+    //        }
+    //    }
     @IBAction func sliderValueChanged(sender: UISlider) {
         
         self.sliderValueLabel.text = "\(sender.value * 100.0)"
@@ -124,91 +124,145 @@ class ViewController: UIViewController {
      NOTE:
      1.It take a bit long to download the images, as compared to the case of concurrent queue. The reason is that we only load one image at a time. Each task waits for the previous task to finish before being executed.
      2.Images are loaded in order image1, image2, image3, and image4. That’s because the queue is a serial queue that executes one task a time.
-    */
-//    @IBAction func didClickOnStart(sender: AnyObject) {
-//        let serialQueue = dispatch_queue_create("com.appcoda.imagesQueue", DISPATCH_QUEUE_SERIAL)
-//        
-//        
-//        dispatch_async(serialQueue) { () -> Void in
-//            
-//            let img1 = Downloader .downloadImageWithURL(imageURLs[0])
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView1.image = img1
-//            })
-//            
-//        }
-//        dispatch_async(serialQueue) { () -> Void in
-//            
-//            let img2 = Downloader.downloadImageWithURL(imageURLs[1])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView2.image = img2
-//            })
-//            
-//        }
-//        dispatch_async(serialQueue) { () -> Void in
-//            
-//            let img3 = Downloader.downloadImageWithURL(imageURLs[2])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView3.image = img3
-//            })
-//            
-//        }
-//        dispatch_async(serialQueue) { () -> Void in
-//            
-//            let img4 = Downloader.downloadImageWithURL(imageURLs[3])
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                self.imageView4.image = img4
-//            })
-//        }
-//    }
+     */
+    //    @IBAction func didClickOnStart(sender: AnyObject) {
+    //        let serialQueue = dispatch_queue_create("com.appcoda.imagesQueue", DISPATCH_QUEUE_SERIAL)
+    //
+    //
+    //        dispatch_async(serialQueue) { () -> Void in
+    //
+    //            let img1 = Downloader .downloadImageWithURL(imageURLs[0])
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView1.image = img1
+    //            })
+    //
+    //        }
+    //        dispatch_async(serialQueue) { () -> Void in
+    //
+    //            let img2 = Downloader.downloadImageWithURL(imageURLs[1])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView2.image = img2
+    //            })
+    //
+    //        }
+    //        dispatch_async(serialQueue) { () -> Void in
+    //
+    //            let img3 = Downloader.downloadImageWithURL(imageURLs[2])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView3.image = img3
+    //            })
+    //
+    //        }
+    //        dispatch_async(serialQueue) { () -> Void in
+    //
+    //            let img4 = Downloader.downloadImageWithURL(imageURLs[3])
+    //
+    //            dispatch_async(dispatch_get_main_queue(), {
+    //
+    //                self.imageView4.image = img4
+    //            })
+    //        }
+    //    }
     
     /**
      using nsoperation queue
- */
+     */
+    //    @IBAction func didClickOnStart(sender: AnyObject) {
+    //         queue = NSOperationQueue()
+    //        queue.addOperationWithBlock{()->Void in
+    //            let img1 = Downloader.downloadImageWithURL(imageURLs[0])
+    //
+    //            NSOperationQueue.mainQueue().addOperationWithBlock({
+    //                self.imageView1.image = img1
+    //            })
+    //        }
+    //
+    //        queue.addOperationWithBlock { () -> Void in
+    //            let img2 = Downloader.downloadImageWithURL(imageURLs[1])
+    //
+    //            NSOperationQueue.mainQueue().addOperationWithBlock({
+    //                self.imageView2.image = img2
+    //            })
+    //
+    //        }
+    //
+    //        queue.addOperationWithBlock { () -> Void in
+    //            let img3 = Downloader.downloadImageWithURL(imageURLs[2])
+    //
+    //            NSOperationQueue.mainQueue().addOperationWithBlock({
+    //                self.imageView3.image = img3
+    //            })
+    //
+    //        }
+    //
+    //        queue.addOperationWithBlock { () -> Void in
+    //            let img4 = Downloader.downloadImageWithURL(imageURLs[3])
+    //
+    //            NSOperationQueue.mainQueue().addOperationWithBlock({
+    //                self.imageView4.image = img4
+    //            })
+    //
+    //        }
+    //    }
+    
+    
     @IBAction func didClickOnStart(sender: AnyObject) {
-         queue = NSOperationQueue()
-        queue.addOperationWithBlock{()->Void in
+        
+        queue = NSOperationQueue()
+        let operation1 = NSBlockOperation(block: {
             let img1 = Downloader.downloadImageWithURL(imageURLs[0])
-            
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.imageView1.image = img1
             })
-        }
+        })
         
-        queue.addOperationWithBlock { () -> Void in
+        operation1.completionBlock = {
+            print("Operation 1 completed")
+        }
+        queue.addOperation(operation1)
+        
+        let operation2 = NSBlockOperation(block: {
             let img2 = Downloader.downloadImageWithURL(imageURLs[1])
-            
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.imageView2.image = img2
             })
-            
-        }
+        })
         
-        queue.addOperationWithBlock { () -> Void in
+        operation2.completionBlock = {
+            print("Operation 2 completed")
+        }
+        queue.addOperation(operation2)
+        
+        
+        let operation3 = NSBlockOperation(block: {
             let img3 = Downloader.downloadImageWithURL(imageURLs[2])
-            
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.imageView3.image = img3
             })
-            
-        }
+        })
         
-        queue.addOperationWithBlock { () -> Void in
+        operation3.completionBlock = {
+            print("Operation 3 completed")
+        }
+        queue.addOperation(operation3)
+        
+        let operation4 = NSBlockOperation(block: {
             let img4 = Downloader.downloadImageWithURL(imageURLs[3])
-            
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.imageView4.image = img4
             })
-            
+        })
+        
+        operation4.completionBlock = {
+            print("Operation 4 completed")
         }
+        queue.addOperation(operation4)
     }
-
+    
 }
 
