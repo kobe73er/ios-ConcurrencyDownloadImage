@@ -10,7 +10,6 @@ import UIKit
 
 let imageURLs = ["http://www.planetware.com/photos-large/F/france-paris-eiffel-tower.jpg", "http://adriatic-lines.com/wp-content/uploads/2015/04/canal-of-Venice.jpg", "http://algoos.com/wp-content/uploads/2015/08/ireland-02.jpg", "http://bdo.se/wp-content/uploads/2014/01/Stockholm1.jpg"]
 
-var queue = NSOperationQueue()
 
 
 class Downloader {
@@ -26,6 +25,9 @@ class Downloader {
 
 class ViewController: UIViewController {
     
+    var queue = NSOperationQueue()
+    
+    
     @IBOutlet weak var imageView1: UIImageView!
     
     @IBOutlet weak var imageView2: UIImageView!
@@ -39,6 +41,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    
+    
+    
+    @IBAction func didClickOnCancel(sender: AnyObject) {
+        
+        self.queue.cancelAllOperations()
     }
     
     override func didReceiveMemoryWarning() {
@@ -221,9 +231,9 @@ class ViewController: UIViewController {
             })
         })
         
-        operation1.completionBlock = {
-            print("Operation 1 completed")
-        }
+        //        operation1.completionBlock = {
+        //            print("Operation 1 completed")
+        //        }
         queue.addOperation(operation1)
         
         let operation2 = NSBlockOperation(block: {
@@ -232,9 +242,11 @@ class ViewController: UIViewController {
                 self.imageView2.image = img2
             })
         })
+        operation2.addDependency(operation1)
+
         
         operation2.completionBlock = {
-            print("Operation 2 completed")
+            print("Operation 2 completedcancelled:\(operation2.cancelled)")
         }
         queue.addOperation(operation2)
         
@@ -247,10 +259,11 @@ class ViewController: UIViewController {
         })
         
         operation3.completionBlock = {
-            print("Operation 3 completed")
+            print("Operation 3 completed,cancelled:\(operation3.cancelled)")
         }
         queue.addOperation(operation3)
-        
+        operation3.addDependency(operation2)
+
         let operation4 = NSBlockOperation(block: {
             let img4 = Downloader.downloadImageWithURL(imageURLs[3])
             NSOperationQueue.mainQueue().addOperationWithBlock({
@@ -259,9 +272,16 @@ class ViewController: UIViewController {
         })
         
         operation4.completionBlock = {
-            print("Operation 4 completed")
+            print("Operation 4 completed,cancelled:\(operation4.cancelled)")
         }
         queue.addOperation(operation4)
+        
+        
+        operation1.completionBlock = {
+            print("Operation 1 completed, cancelled:\(operation1.cancelled) ")
+        }
+        
+        
     }
     
 }
